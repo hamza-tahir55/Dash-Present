@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Node / Next.js
+servers/nextjs/node_modules/
+servers/nextjs/.next/
+servers/nextjs/.next-build/
+servers/nextjs/out/
+servers/nextjs/tsconfig.tsbuildinfo
+
+# Python venvs
+venv/
+servers/fastapi/venv/
+servers/fastapi/.venv/
+__pycache__/
+
+# App data / models / caches
+app_data/
+servers/fastapi/app_data/
+servers/fastapi/chroma/
+servers/fastapi/chroma/**/*
+servers/fastapi/uv.lock
+
+# Local exports/user data
+servers/nextjs/user_data/
+servers/nextjs/exports*/

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Test</title>
+</head>
+<body>
+    <h1>PDF Test Links</h1>
+    <p>Click the links below to test PDF access:</p>
+    <ul>
+        <li><a href="/user_data/exports/Slide%201%20Overview%20of%20Financial%20Performance%20(Ma.pdf" target="_blank">Direct Link to PDF</a></li>
+        <li><a href="#" onclick="downloadPDF(); return false;">JavaScript Download</a></li>
+    </ul>
+
+    <script>
+        function downloadPDF() {
+            const link = document.createElement('a');
+            link.href = '/user_data/exports/Slide%201%20Overview%20of%20Financial%20Performance%20(Ma.pdf';
+            link.download = 'Slide 1 Overview of Financial Performance (Ma.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

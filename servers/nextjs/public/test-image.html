@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Testing Image Access</h1>
+    
+    <h2>Method 1: Direct uploads path</h2>
+    <p>Testing direct access to uploaded image:</p>
+    <img src="/uploads/e35e3de4-1f57-42fa-8421-0c1f8c50cf0d.png" alt="Test Image" style="max-width: 500px;">
+    
+    <h2>Method 2: App_data path (FastAPI server)</h2>
+    <p>Testing access via app_data path:</p>
+    <img src="/app_data/uploads/e35e3de4-1f57-42fa-8421-0c1f8c50cf0d.png" alt="Test Image" style="max-width: 500px;">
+    
+    <p>If you see both images above, the configuration is working correctly.</p>
+</body>
+</html>

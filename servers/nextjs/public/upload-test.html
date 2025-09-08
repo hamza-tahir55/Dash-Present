@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test</title>
+</head>
+<body>
+    <h1>Image Upload Test</h1>
+    
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="imageInput" name="file" accept="image/*">
+        <button type="submit">Upload Image</button>
+    </form>
+    
+    <div id="result" style="margin-top: 20px;">
+        <h2>Upload Result:</h2>
+        <div id="message"></div>
+        <div id="imagePreview" style="margin-top: 10px;"></div>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('imageInput');
+            const messageDiv = document.getElementById('message');
+            const imagePreview = document.getElementById('imagePreview');
+            
+            if (!fileInput.files.length) {
+                messageDiv.textContent = 'Please select a file first';
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('file', fileInput.files[0]);
+            
+            messageDiv.textContent = 'Uploading...';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/v1/ppt/images/upload-image', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    messageDiv.textContent = 'Upload successful!';
+                    
+                    // Extract filename from path
+                    const filename = result.path.split('/').pop();
+                    
+                    // Display the uploaded image using both methods
+                    imagePreview.innerHTML = `
+                        <h3>Method 1: Direct path</h3>
+                        <img src="/uploads/${filename}" alt="Uploaded Image" style="max-width: 500px;">
+                        
+                        <h3>Method 2: App_data path</h3>
+                        <img src="/app_data/uploads/${filename}" alt="Uploaded Image" style="max-width: 500px;">
+                        
+                        <p>Image ID: ${result.id}</p>
+                        <p>Image path: ${result.path}</p>
+                    `;
+                } else {
+                    messageDiv.textContent = `Error: ${result.detail || 'Unknown error'}`;
+                }
+            } catch (error) {
+                messageDiv.textContent = `Error: ${error.message}`;
+                console.error('Upload error:', error);
+            }
+        });
+    </script>
+</body>
+</html>
