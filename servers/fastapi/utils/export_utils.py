@@ -51,11 +51,12 @@ async def export_presentation(
             path=pptx_path,
         )
     else:
+        frontend_base_url = os.getenv("FRONTEND_BASE_URL", "http://localhost:3000")
         async with aiohttp.ClientSession() as session:
             async with session.post(
-                "http://localhost/api/export-as-pdf",
+                f"{frontend_base_url}/api/export-as-pdf",
                 json={
-                    "id": presentation_id,
+                    "id": str(presentation_id),
                     "title": sanitize_filename(title or str(uuid.uuid4())),
                 },
             ) as response:
