@@ -6,7 +6,7 @@ class UserConfig(BaseModel):
     LLM: Optional[str] = None
 
     # OpenAI
-    OPENAI_API_KEY: Optional[str] = "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"
+    OPENAI_API_KEY: Optional[str] = "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"
     OPENAI_MODEL: Optional[str] = "gpt-4o"
 
     # Google
